@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:comp1="eu.claudius.iacob.ui.components.*"
+					   width="550" height="720"
+					   showStatusBar="false">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.utils.ObjectProxy;
+			
+			import spark.events.IndexChangeEvent;
+			
+			import eu.claudius.iacob.ui.components.ParameterChangeEvent;
+			
+			[Bindable] private var dataset1 : Object = new ObjectProxy ({
+				label: 'Dataset 1',
+				parameters : [
+					
+					new ObjectProxy ({
+						name: "Consonance",
+						color: 0x00cc00,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 1;
+							a[50] = 50;
+							a[100] = 100;
+							return a;
+						})()
+					})
+					,
+					
+					new ObjectProxy ({
+						name: "Consonance (actual result)",
+						color: 0x009900,
+						visible: true,
+						locked: true,
+						type: "outcome",
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 1;
+							a[49] = 1;
+							a[50] = 50;
+							a[99] = 50;
+							a[100] = 100;
+							return a;
+						})()
+					})
+					,
+					
+					new ObjectProxy ({
+						name: "Number of Voices",
+						color: 0x0000cc,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 75;
+							a[12] = 34;
+							a[35] = 46;
+							a[48] = 46;
+							a[50] = 50;
+							a[62] = 0;
+							a[67] = 15;
+							a[69] = 4;
+							a[78] = 23;
+							a[84] = 36;
+							a[92] = 10;
+							a[100] = 50;
+							return a;
+						})()
+					})
+					
+					,
+					new ObjectProxy ({
+						name: "Progression",
+						color: 0xcc0000,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 20;
+							a[35] = 46;
+							a[41] = 12;
+							a[69] = 74;
+							a[76] = 36;
+							a[85] = 100;
+							a[100] = 1;
+							return a;
+						})()
+					})
+				] 
+			});
+			
+			[Bindable] private var dataset2 : Object = new ObjectProxy ({
+				label: 'Dataset 2',
+				parameters : [
+				
+					new ObjectProxy ({
+						name: "Crowdiness",
+						color: 0xcc00cc,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 59;
+							a[35] = 48;
+							a[41] = 29;
+							a[69] = 92;
+							a[76] = 18;
+							a[85] = 80;
+							a[100] = 34;
+							return a;
+						})()
+					}),
+					
+					new ObjectProxy ({
+						name: "Piramidal disposition",
+						color: 0x9900ff,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 53;
+							a[26] = 27;
+							a[37] = 94;
+							a[49] = 26;
+							a[100] = 19;
+							return a;
+						})()
+					})
+				]
+			});
+			
+			[Bindable] private var dataset3 : Object = new ObjectProxy ({
+				label: 'Dataset 3',
+				parameters : [
+					
+					new ObjectProxy ({
+						name: "Cadential tendency",
+						color: 0xcc33cc,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 48;
+							a[15] = 74;
+							a[26] = 26;
+							a[69] = 85;
+							a[100] = 14;
+							return a;
+						})()
+					}),
+					
+					new ObjectProxy ({
+						name: "Directionality",
+						color: 0x99ffff,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 12;
+							a[83] = 49;
+							a[100] = 2;
+							return a;
+						})()
+					})
+				]
+			});
+			
+			[Bindable] private var dataset4 : Object = new ObjectProxy ({
+				label: 'Durations Playground',
+				parameters : [
+					
+					new ObjectProxy ({
+						name: "WHOLE",
+						color: 0xe6914b,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 1;
+							a[50] = 15;
+							a[85] = 60;
+							a[100] = 100;
+							return a;
+						})()
+					}),
+					
+					new ObjectProxy ({
+						name: "HALF",
+						color: 0xf58231,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 1;
+							a[50] = 30;
+							a[75] = 100;
+							a[100] = 1;
+							return a;
+						})()
+					}),
+					
+					new ObjectProxy ({
+						name: "QUARTER",
+						color: 0x8a6324,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 1;
+							a[40] = 58;
+							a[50] = 100;
+							a[60] = 58;
+							a[100] = 1;
+							return a;
+						})()
+					}),
+					
+					new ObjectProxy ({
+						name: "EIGHT",
+						color: 0x808000,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 1;
+							a[25] = 100;
+							a[50] = 30;
+							a[100] = 1;
+							return a;
+						})()
+					}),
+					
+					new ObjectProxy ({
+						name: "SIXTEENTH",
+						color: 0x46990,
+						visible: true,
+						locked: false,
+						values : (function () : Array {
+							var a : Array = new Array (100);
+							a[1] = 100;
+							a[15] = 60;
+							a[50] = 15;
+							a[100] = 1;
+							return a;
+						})()
+					}),
+				]
+			});
+			
+			[Bindable] private var testParameterSets : ArrayCollection = new ArrayCollection ([dataset1, dataset2, dataset3, dataset4]);
+			
+			protected function _onParametersetChanged (event : IndexChangeEvent) : void {
+				var selectedIndex : int = event.newIndex;
+				var data : ObjectProxy = (testParameterSets[selectedIndex] as ObjectProxy);
+				parametersEditor.dataProvider = data;
+			}
+			
+			/**
+			 * Executed when the user changes a parameter (in other ways than 
+			 * altering its envelope).
+			 */
+			protected function _onParameterChange (event : ParameterChangeEvent) : void {
+				trace ('\nPARAMETER CHANGE:');
+				trace ('type: ' + event.type);
+				trace ('data:\n' + JSON.stringify (event.data, null, '\t'));
+			}
+			
+			/**
+			 * Executed when the user alters a parameter's envelope (e.g., by
+			 * adding, removing or dragging nodes.
+			 */
+			protected function _onNodesChange(event:ParameterChangeEvent) : void {
+				trace ('\nNODE CHANGE:');
+				trace ('type: ' + event.type);
+				trace ('data:\n' + JSON.stringify (event.data, null, '\t'));
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Group width="100%" left="20" top="20" right="20" bottom="20">
+		
+		<s:layout>
+			<s:VerticalLayout gap="10" horizontalAlign="justify" />
+		</s:layout>
+		
+		<!-- Component -->
+		<comp1:ParametersGraphicalEditor id="parametersEditor" height="100%" 
+										 parameterChange="_onParameterChange(event)"
+										 nodesChange="_onNodesChange(event)"/>
+		
+		<!-- Testing UI -->
+		<s:Group />
+		<s:Label lineBreak="toFit" text="Select a dataset to load below:" />
+		<s:ComboBox dataProvider="{testParameterSets}" change="_onParametersetChanged (event)" />
+	</s:Group>
+	
+</s:WindowedApplication>
